@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         //Store the vertical axis value in a float 
         float moveVertical = Input.GetAxis("Vertical");
 
-        //Create a new vector 3 based on the horizontal an vertical values
+        //Create a new vector 3 based on the horizontal and vertical values
         Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
 
         //Add force to our rigidbody from our movement vector times our speed
