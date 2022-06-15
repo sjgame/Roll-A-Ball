@@ -27,4 +27,14 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if we trigger a pickup, destroy the pickup    
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
 }
