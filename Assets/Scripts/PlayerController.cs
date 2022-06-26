@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 1.0f;
+   
     public int pickupCount; //Stores pickup count (variable)
     int totalPickups;
     private bool wonGame = false;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         if (wonGame) //disables player controls if (wonGame = true) returns function 
             return;
 
+        
         //Store the horizontal axis value in a float 
         float moveHorizontal = Input.GetAxis("Horizontal");
         //Store the vertical axis value in a float 
@@ -60,6 +62,11 @@ public class PlayerController : MonoBehaviour
         //Add force to our rigidbody from our movement vector times our speed
         rb.AddForce(movement * speed);
 
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 1.0f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,8 +81,8 @@ public class PlayerController : MonoBehaviour
             pickupFill.fillAmount = pickupFill.fillAmount + pickupChunk;
 
             CheckPickups();
-            
-            
+
+
 
             Destroy(other.gameObject);
         }
@@ -88,13 +95,13 @@ public class PlayerController : MonoBehaviour
     {
         //Display the new pickup count to the player
         scoreText.text = "Pickups Left: " + pickupCount.ToString() + "/" + totalPickups.ToString();
-       
+
         //Check if the pickupCount == 0
         if (pickupCount == 0)
         {
             //if pickupCount == 0, display win message
             winPanel.gameObject.SetActive(true);
-            
+
             inGamePanel.SetActive(false);
             //Remove controls from player
             wonGame = true;
@@ -103,7 +110,7 @@ public class PlayerController : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
 
-       
+
     }
 
     //Temporary reset functionality

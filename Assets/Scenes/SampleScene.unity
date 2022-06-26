@@ -1393,6 +1393,7 @@ GameObject:
   - component: {fileID: 1577568966}
   - component: {fileID: 1577568970}
   - component: {fileID: 1577568971}
+  - component: {fileID: 1577568972}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1514,6 +1515,19 @@ MonoBehaviour:
   winPanel: {fileID: 822870324}
   pickupFill: {fileID: 1836408959}
   pickupChunk: 0
+--- !u!114 &1577568972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577568965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248a56e7a764cae41ac386342d3cb494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 5
 --- !u!1 &1596341314
 GameObject:
   m_ObjectHideFlags: 0
