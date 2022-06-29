@@ -1392,8 +1392,8 @@ GameObject:
   - component: {fileID: 1577568967}
   - component: {fileID: 1577568966}
   - component: {fileID: 1577568970}
-  - component: {fileID: 1577568971}
   - component: {fileID: 1577568972}
+  - component: {fileID: 1577568971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb00c41ecc3d14e9a2ad1a54feb337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 7
   pickupCount: 0
   scoreText: {fileID: 432382799}
   winText: {fileID: 2019924977}
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248a56e7a764cae41ac386342d3cb494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 5
+  jumpHeight: 10
 --- !u!1 &1596341314
 GameObject:
   m_ObjectHideFlags: 0
