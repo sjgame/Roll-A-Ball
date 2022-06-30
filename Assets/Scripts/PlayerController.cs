@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            controlsPopup.gameObject.SetActive(true);
+            controlsPopup.gameObject.SetActive(false);
         }
             
 
