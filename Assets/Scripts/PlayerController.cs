@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject winPanel;
     public Image pickupFill;
     public float pickupChunk;
+    public Image controlsPopup;
     void Start()
     {
         //Turn off our win panel object
@@ -26,6 +27,13 @@ public class PlayerController : MonoBehaviour
 
         //Turn on ingame panel
         inGamePanel.SetActive(true);
+
+        //Popup Controls after key press
+        controlsPopup.gameObject.SetActive(true);
+        
+            
+        
+        
 
         //Gets the rigidbody component attached to this game object
         rb = GetComponent<Rigidbody>();
@@ -42,6 +50,16 @@ public class PlayerController : MonoBehaviour
 
         //Display the pickups to the user
         CheckPickups();
+    }
+
+    private void Update()
+    {
+        if (Input.anyKey)
+        {
+            controlsPopup.gameObject.SetActive(true);
+        }
+            
+
     }
 
     void FixedUpdate()
