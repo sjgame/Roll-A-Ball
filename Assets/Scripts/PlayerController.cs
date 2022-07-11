@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //turn off the control popup
         if (Input.anyKey)
         {
             controlsPopup.gameObject.SetActive(false);
