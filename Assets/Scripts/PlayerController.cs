@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject winPanel;
     public Image pickupFill;
     public float pickupChunk;
-    public Image controlsPopup;
+    public Image controlsPopup; //Stores 
     void Start()
     {
         //Turn off our win panel object
@@ -28,13 +28,9 @@ public class PlayerController : MonoBehaviour
         //Turn on ingame panel
         inGamePanel.SetActive(true);
 
-        //Popup Controls after key press
+        //Activates the controls popup (When game starts)
         controlsPopup.gameObject.SetActive(true);
         
-            
-        
-        
-
         //Gets the rigidbody component attached to this game object
         rb = GetComponent<Rigidbody>();
 
@@ -54,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //turn off the control popup
+        //Turn off the control popup
         if (Input.anyKey)
         {
             controlsPopup.gameObject.SetActive(false);
@@ -66,7 +62,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
 
     {
-        if (wonGame) //disables player controls if (wonGame = true) returns function 
+        if (wonGame) //Disables player controls if (wonGame = true) returns function 
             return;
 
         
@@ -124,7 +120,7 @@ public class PlayerController : MonoBehaviour
             inGamePanel.SetActive(false);
             //Remove controls from player
             wonGame = true;
-            //set the velocity of the rigidBody to 0
+            //Set the velocity of the rigidBody to 0
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
