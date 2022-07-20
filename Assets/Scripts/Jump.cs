@@ -6,6 +6,9 @@ public class Jump : MonoBehaviour
 {
     private Rigidbody rb;
     public float jumpHeight = 5.0f;
+    private float ySpeed;
+    public float jumpSpeed = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +20,20 @@ public class Jump : MonoBehaviour
     {
         //Checks to see if the player is grounded, if they are, they can jump again
         if (IsGrounded() && Input.GetButtonDown("Jump"))
-        {   
-            rb.velocity = Vector3.up * jumpHeight; //Jump using a Vector 3 in the upwards direction multiplied by the set height
+        {
+            //rb.velocity = Vector3.up * jumpHeight; //Jump using a Vector 3 in the upwards direction multiplied by the set height
+
+            rb.AddForce(Vector3.up * jumpHeight);
         }
+
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            ySpeed = jumpSpeed;
+        }
+
+        
     }
     public bool IsGrounded()
     {   //Grounds the player and tells the if statement if the player is grounded

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 1.0f;
+    public float jumpHeight = 7;
    
     public int pickupCount; //Stores pickup count (variable)
     int totalPickups;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
 
     {
-        if (wonGame) //Disables player controls if (wonGame = true) returns function 
+         if (wonGame) //Disables player controls if (wonGame = true) returns function 
             return;
 
         
@@ -77,9 +78,16 @@ public class PlayerController : MonoBehaviour
         //Add force to our rigidbody from our movement vector times our speed
         rb.AddForce(movement * speed);
 
+
+        
+
+
     }
 
-    public bool IsGrounded()
+
+    
+
+public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.0f);
     }
