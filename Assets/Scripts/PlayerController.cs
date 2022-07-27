@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 1.0f;
-    public float jumpHeight = 7;
    
+
     public int pickupCount; //Stores pickup count (variable)
     int totalPickups;
     private bool wonGame = false;
@@ -59,14 +59,13 @@ public class PlayerController : MonoBehaviour
             
 
     }
-
-    void FixedUpdate()
+  
+void FixedUpdate()
 
     {
          if (wonGame) //Disables player controls if (wonGame = true) returns function 
             return;
-
-        
+         
         //Store the horizontal axis value in a float 
         float moveHorizontal = Input.GetAxis("Horizontal");
         //Store the vertical axis value in a float 
@@ -78,16 +77,10 @@ public class PlayerController : MonoBehaviour
         //Add force to our rigidbody from our movement vector times our speed
         rb.AddForce(movement * speed);
 
-
-        
-
-
     }
 
 
-    
-
-public bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.0f);
     }

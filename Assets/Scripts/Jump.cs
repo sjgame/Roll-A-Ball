@@ -6,8 +6,8 @@ public class Jump : MonoBehaviour
 {
     private Rigidbody rb;
     public float jumpHeight = 5.0f;
-    private float ySpeed;
-    public float jumpSpeed = 5.0f;
+    public float ySpeed = 1.0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +28,6 @@ public class Jump : MonoBehaviour
 
         ySpeed += Physics.gravity.y * Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            ySpeed = jumpSpeed;
-        }
-
-        
     }
     public bool IsGrounded()
     {   //Grounds the player and tells the if statement if the player is grounded
