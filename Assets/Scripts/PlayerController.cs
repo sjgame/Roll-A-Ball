@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     public float speed = 1.0f;
    
+
     public int pickupCount; //Stores pickup count (variable)
     int totalPickups;
     private bool wonGame = false;
@@ -58,14 +59,13 @@ public class PlayerController : MonoBehaviour
             
 
     }
-
-    void FixedUpdate()
+  
+void FixedUpdate()
 
     {
-        if (wonGame) //Disables player controls if (wonGame = true) returns function 
+         if (wonGame) //Disables player controls if (wonGame = true) returns function 
             return;
-
-        
+         
         //Store the horizontal axis value in a float 
         float moveHorizontal = Input.GetAxis("Horizontal");
         //Store the vertical axis value in a float 
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
 
     }
+
 
     public bool IsGrounded()
     {
