@@ -4878,7 +4878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToCover: 2.86
-  speed: 7.44
+  speed: 5.79
 --- !u!4 &577842323
 Transform:
   m_ObjectHideFlags: 0
