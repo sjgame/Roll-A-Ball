@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Schatzman_J_305083_AGA206_A1_Playable_Game.unity
     guid: ffa928b8d137f974f8d0f38e095e0181
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 1dc3c656de6bb2d48b728c6b526b4ccb
   m_configObjects: {}
