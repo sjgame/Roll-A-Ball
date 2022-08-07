@@ -10,7 +10,7 @@ public class Rotater : MonoBehaviour
     void Update()
     {
         //Roatate our object around an axis over time 
-        transform.Rotate(new Vector3(0, 10, 0) * Time.deltaTime * speed, Space.World ); 
+        transform.Rotate(new Vector3(0f, 0f, 10f) * Time.deltaTime * speed, Space.Self); 
 
     }
 }

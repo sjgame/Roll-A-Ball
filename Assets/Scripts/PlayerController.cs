@@ -100,7 +100,7 @@ void FixedUpdate()
 
 
 
-            Destroy(other.gameObject);
+            
         }
 
         //Create a win condition that happens when pickup count == 0
