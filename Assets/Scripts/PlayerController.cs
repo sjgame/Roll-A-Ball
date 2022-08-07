@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 1.0f;
+    bool grounded = true;
    
 
     public int pickupCount; //Stores pickup count (variable)
@@ -65,18 +66,34 @@ void FixedUpdate()
     {
          if (wonGame) //Disables player controls if (wonGame = true) returns function 
             return;
-         
-        //Store the horizontal axis value in a float 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        //Store the vertical axis value in a float 
-        float moveVertical = Input.GetAxis("Vertical");
 
-        //Create a new vector 3 based on the horizontal and vertical values
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        if (grounded)
+        {
+            //Store the horizontal axis value in a float 
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            //Store the vertical axis value in a float 
+            float moveVertical = Input.GetAxis("Vertical");
 
-        //Add force to our rigidbody from our movement vector times our speed
-        rb.AddForce(movement * speed);
+            //Create a new vector 3 based on the horizontal and vertical values
+            Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
 
+            //Add force to our rigidbody from our movement vector times our speed
+            rb.AddForce(movement * speed);
+        }
+
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"));
+        grounded = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"));
+        grounded = false;
     }
 
 
