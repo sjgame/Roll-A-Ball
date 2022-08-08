@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed = 1.0f;
     bool grounded = true;
-   
+
 
     public int pickupCount; //Stores pickup count (variable)
     int totalPickups;
@@ -22,6 +23,13 @@ public class PlayerController : MonoBehaviour
     public Image pickupFill;
     public float pickupChunk;
     public Image controlsPopup; //Stores 
+
+    public static bool gameIsPaused;
+
+    public ParticleSystem collisionParticleSystem;
+
+    [SerializeField] ParticleSystem particleBurst = null;
+    
     void Start()
     {
         //Turn off our win panel object
@@ -31,7 +39,7 @@ public class PlayerController : MonoBehaviour
         inGamePanel.SetActive(true);
 
         //Activates the controls popup (When game starts)
-        controlsPopup.gameObject.SetActive(true);
+        //controlsPopup.gameObject.SetActive(true);
         
         //Gets the rigidbody component attached to this game object
         rb = GetComponent<Rigidbody>();
@@ -48,17 +56,47 @@ public class PlayerController : MonoBehaviour
 
         //Display the pickups to the user
         CheckPickups();
+
+        gameIsPaused = false;
+
+
     }
 
-    private void Update()
+
+
+    public void Update()
     {
         //Turn off the control popup
         if (Input.anyKey)
         {
             controlsPopup.gameObject.SetActive(false);
         }
-            
 
+       
+        //Press escape key to pause the game and open up the menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            winPanel.gameObject.SetActive(!winPanel.gameObject.activeSelf);
+
+            gameIsPaused = !gameIsPaused;
+            PauseGame();
+
+        }
+
+    }
+
+    //Pause game functon
+    void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            Time.timeScale = 0f;
+        }
+
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
   
 void FixedUpdate()
@@ -84,6 +122,7 @@ void FixedUpdate()
 
     }
 
+    //Checks to see if the player is grounded (for the jump pads)
     private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.CompareTag("Ground"));
@@ -96,7 +135,7 @@ void FixedUpdate()
         grounded = false;
     }
 
-
+    //Checks to see if player is grounded for the jump function
     public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.0f);
@@ -115,19 +154,26 @@ void FixedUpdate()
 
             CheckPickups();
 
+            Collect();
 
-
+            Destroy(other.gameObject);
             
+
         }
 
         //Create a win condition that happens when pickup count == 0
 
     }
 
+    void Collect()
+    {
+        particleBurst.Play();
+    }
+
     void CheckPickups()
     {
         //Display the new pickup count to the player
-        scoreText.text = "Pickups Left: " + pickupCount.ToString() + "/" + totalPickups.ToString();
+        scoreText.text = "Cogs: " + pickupCount.ToString() + "/" + totalPickups.ToString();
 
         //Check if the pickupCount == 0
         if (pickupCount == 0)
@@ -154,4 +200,16 @@ void FixedUpdate()
         UnityEngine.SceneManagement.SceneManager.LoadScene
             (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public string GetSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
+
 }

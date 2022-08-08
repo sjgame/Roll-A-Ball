@@ -3,7 +3,15 @@ guid: a7eb00c41ecc3d14e9a2ad1a54feb337
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - scoreText: {instanceID: 0}
+  - winText: {instanceID: 0}
+  - inGamePanel: {instanceID: 0}
+  - winPanel: {instanceID: 0}
+  - pickupFill: {instanceID: 0}
+  - controlsPopup: {instanceID: 0}
+  - collisionParticleSystem: {instanceID: 0}
+  - particleBurst: {fileID: 5285757807208666917, guid: c5dc5238a057b3e4a96e7d97c360502e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
