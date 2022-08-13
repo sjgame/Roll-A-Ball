@@ -157,7 +157,7 @@ void FixedUpdate()
 
             GameObject go = Instantiate(particlePrefab, other.transform.position, other.transform.rotation);
 
-            //Destroy(go, 2f);
+            Destroy(go, 2f);
 
             Destroy(other.gameObject);
             
