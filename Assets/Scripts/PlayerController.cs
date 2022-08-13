@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem collisionParticleSystem;
 
-    [SerializeField] ParticleSystem particleBurst = null;
+    //[SerializeField] ParticleSystem particleBurst = null;
+    public GameObject particlePrefab;
     
     void Start()
     {
@@ -154,7 +155,9 @@ void FixedUpdate()
 
             CheckPickups();
 
-            Collect();
+            GameObject go = Instantiate(particlePrefab, other.transform.position, other.transform.rotation);
+
+            //Destroy(go, 2f);
 
             Destroy(other.gameObject);
             
@@ -165,15 +168,12 @@ void FixedUpdate()
 
     }
 
-    void Collect()
-    {
-        particleBurst.Play();
-    }
+    
 
     void CheckPickups()
     {
         //Display the new pickup count to the player
-        scoreText.text = "Cogs: " + pickupCount.ToString() + "/" + totalPickups.ToString();
+        scoreText.text = "Power Cogs: " + pickupCount.ToString() + "/" + totalPickups.ToString();
 
         //Check if the pickupCount == 0
         if (pickupCount == 0)
