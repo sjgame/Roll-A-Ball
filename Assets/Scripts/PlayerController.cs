@@ -155,6 +155,7 @@ void FixedUpdate()
 
             CheckPickups();
 
+            //Crates new particle effect that plays on creation
             GameObject go = Instantiate(particlePrefab, other.transform.position, other.transform.rotation);
 
             Destroy(go, 2f);
@@ -173,7 +174,7 @@ void FixedUpdate()
     void CheckPickups()
     {
         //Display the new pickup count to the player
-        scoreText.text = "Power Cogs: " + pickupCount.ToString() + "/" + totalPickups.ToString();
+        scoreText.text = "Remaining Cogs: " + pickupCount.ToString() + "/" + totalPickups.ToString();
 
         //Check if the pickupCount == 0
         if (pickupCount == 0)
