@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem collisionParticleSystem;
 
+    GameObject resetPoint;
+    bool resetting = false;
+    Color originalColour;
+
     //[SerializeField] ParticleSystem particleBurst = null;
     public GameObject particlePrefab;
     
@@ -41,7 +45,10 @@ public class PlayerController : MonoBehaviour
 
         //Activates the controls popup (When game starts)
         //controlsPopup.gameObject.SetActive(true);
-        
+
+        resetPoint = GameObject.Find("Reset Point");
+        originalColour = GetComponent<Renderer>().material.color;
+
         //Gets the rigidbody component attached to this game object
         rb = GetComponent<Rigidbody>();
 
@@ -73,6 +80,7 @@ public class PlayerController : MonoBehaviour
             controlsPopup.gameObject.SetActive(false);
         }
 
+        
        
         //Press escape key to pause the game and open up the menu
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -103,8 +111,14 @@ public class PlayerController : MonoBehaviour
 void FixedUpdate()
 
     {
-         if (wonGame) //Disables player controls if (wonGame = true) returns function 
+        if (resetting)
             return;
+
+
+        if (wonGame) //Disables player controls if (wonGame = true) returns function 
+            return;
+
+        
 
         if (grounded)
         {
@@ -121,6 +135,14 @@ void FixedUpdate()
         }
 
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Respawn"))
+        {
+            StartCoroutine(ResetPlayer());
+        }
     }
 
     //Checks to see if the player is grounded (for the jump pads)
@@ -168,6 +190,26 @@ void FixedUpdate()
         //Create a win condition that happens when pickup count == 0
 
     }
+
+    public IEnumerator ResetPlayer()
+    {
+        resetting = true;
+        GetComponent<Renderer>().material.color = Color.black;
+        rb.velocity = Vector3.zero;
+        Vector3 startPos = transform.position;
+        float resetSpeed = 2f;
+        var i = 0.0f;
+        var rate = 1.0f / resetSpeed;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            transform.position = Vector3.Lerp(startPos, resetPoint.transform.position, i);
+            yield return null;
+        }
+        GetComponent<Renderer>().material.color = originalColour;
+        resetting = false;
+    }
+
 
     
 
