@@ -31,9 +31,11 @@ public class PlayerController : MonoBehaviour
     GameObject resetPoint;
     bool resetting = false;
     Color originalColour;
+    
 
     //[SerializeField] ParticleSystem particleBurst = null;
     public GameObject particlePrefab;
+    public GameObject GreenBurst;
     
     void Start()
     {
@@ -164,33 +166,6 @@ void FixedUpdate()
         return Physics.Raycast(transform.position, Vector3.down, 1.0f);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //if we trigger a pickup, destroy the pickup    
-        if (other.gameObject.CompareTag("Pickup"))
-        {
-            //Decrement the pickupCount when we collide with a pickup
-            pickupCount -= 1;
-
-            //Increase the fill amount of our pickup fill image
-            pickupFill.fillAmount = pickupFill.fillAmount + pickupChunk;
-
-            CheckPickups();
-
-            //Crates new particle effect that plays on creation
-            GameObject go = Instantiate(particlePrefab, other.transform.position, other.transform.rotation);
-
-            Destroy(go, 2f);
-
-            Destroy(other.gameObject);
-            
-
-        }
-
-        //Create a win condition that happens when pickup count == 0
-
-    }
-
     public IEnumerator ResetPlayer()
     {
         resetting = true;
@@ -210,8 +185,48 @@ void FixedUpdate()
         resetting = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //if we trigger a pickup, destroy the pickup    
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            //Decrement the pickupCount when we collide with a pickup
+            pickupCount -= 1;
 
-    
+            //Increase the fill amount of our pickup fill image
+            pickupFill.fillAmount = pickupFill.fillAmount + pickupChunk;
+
+            CheckPickups();
+
+            //Crates new particle effect that plays on creation
+            GameObject go = Instantiate(particlePrefab, other.transform.position, other.transform.rotation);
+
+            Destroy(go, 2f);
+
+            Destroy(other.gameObject);
+
+
+        }
+
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            var playerObject = GameObject.Find("Player");
+            var playerPos = playerObject.transform.position;
+            resetPoint.transform.position = playerPos;
+            Destroy(other.gameObject);
+            Instantiate(GreenBurst, other.transform.position, other.transform.rotation);
+
+
+        }
+
+        //Create a win condition that happens when pickup count == 0
+
+    }
+
+
+
+
+
 
     void CheckPickups()
     {
