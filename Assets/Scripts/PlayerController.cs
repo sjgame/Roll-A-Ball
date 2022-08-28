@@ -208,6 +208,8 @@ void FixedUpdate()
 
         }
 
+       //sets the respawn point to the checkpoint/players position and triggers a particle effect
+        
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             var playerObject = GameObject.Find("Player");
